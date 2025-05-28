@@ -5,6 +5,7 @@ import axios from "axios";
 import InputField from "./InputField";
 import SelectField from "./SelectField";
 import Button from "./Button";
+import ResponseDisplay from "./ResponseDisplay";
 
 const AiTutor: React.FC = () => {
   const [topic, setTopic] = useState<string>("");
@@ -41,7 +42,7 @@ const AiTutor: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">AI Tutor</h1>
-      <div className="w-full max-w-md bg-white shadow-lg rounded-lg p-6 space-y-4">
+      <div className="w-full max-w-lg bg-white shadow-lg rounded-lg p-6 space-y-4">
         <InputField label="Enter Topic" value={topic} onChange={setTopic} />
         <SelectField
           value={queryType}
@@ -62,16 +63,9 @@ const AiTutor: React.FC = () => {
             onChange={setCustomQuestion}
           />
         )}
-        <Button onClick={handleSubmit}  disabled={loading} loading={loading} />
+        <Button onClick={handleSubmit} disabled={loading} loading={loading} />
       </div>
-      <div className="mt-6 w-full max-w-md bg-gray-50 p-4 rounded-lg shadow">
-        <h2 className="text-xl font-semibold text-gray-800 mb-2">Response</h2>
-        <p className="text-gray-600 mb-4">
-          {loading ? "Loading..." : ""}
-        </p>
-
-        <p className="text-gray-700">{response || "No response yet"}</p>
-      </div>
+      <ResponseDisplay response={response} />
     </div>
   );
 };
